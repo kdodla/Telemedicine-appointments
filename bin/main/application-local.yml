@@ -1,0 +1,48 @@
+server:  
+  port: ${PORT:2222}
+
+spring:  
+  application:
+    name: telemed-appointments
+  logging:
+    pattern:
+      console: "%msg%n"
+    level:
+      org.springframework: INFO
+      org.hibernate: INFO
+  datasource:    
+    url: jdbc:mysql://localhost:3306/telemed?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: root
+    hikari:
+      connection-timeout: "20000"
+      minimum-idle: "5"
+      maximum-pool-size: "12"
+      idle-timeout: "300000"
+      max-lifetime: "1200000"
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: auto
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate.id.new_generator_mappings: "false"
+      hibernate.format_sql: "true"
+      hibernate.show_sql: false       
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+    schemas: [telemed]
+
+# ===============================
+# = Email configuration
+# ===============================
+  mail:
+    host: smtp.gmail.com
+    username: social@scatterfit.com
+    password: "Socpwd1#"
+    port: 25
+#    password: "Socpwd1#"
+#    protocol: smtp
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
