@@ -28,9 +28,9 @@ public class EmailApi {
 
 	@ApiOperation(value = "Send an email")
 	@RequestMapping(value = "/send", method = RequestMethod.POST)
-	public void sendEmail(@RequestBody @Valid EmailInfo emailInfo) {
-		logger.info(String.format("email.sendEmail(%s)", emailInfo));
-		emailService.sendEmail(emailInfo);
+	public void sendEmail(@RequestBody @Valid EmailInfo emailInfo1) {
+		logger.info(String.format("email.sendEmail(%s)", emailInfo1));
+		emailService.sendEmail(emailInfo1);
 	}
 
 }
