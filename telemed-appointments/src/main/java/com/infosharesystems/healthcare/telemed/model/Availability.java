@@ -14,9 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Data
-@EqualsAndHashCode(callSuper=false)
-@ToString
+@Data@EqualsAndHashCode(callSuper=false)@ToString
 @Entity
 @Table(name = "availability")
 public class Availability extends AbstractEntity{

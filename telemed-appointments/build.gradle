@@ -1,0 +1,79 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.infosharesystems.telemed.appointments'
+//version = '1.0-SNAPSHOT'
+
+description = "telemed-appointments"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+test {
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+}
+
+jar {
+	baseName = 'telemed-appointments'
+	//version = '0.0.1-SNAPSHOT'
+}
+
+bootRepackage {
+    enabled = true
+}
+
+repositories {
+	 mavenCentral()
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencyManagement {
+  imports {
+    mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR7'
+  }
+}
+
+dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version:'1.1.0.RELEASE'    
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:"${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:"${springBootVersion}"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version:'1.1.0.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version:'1.0.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:"${springBootVersion}"
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.47'
+    compile group: 'org.projectlombok', name: 'lombok', version:'1.18.8'
+    compile group: 'org.flywaydb', name: 'flyway-core', version:'3.2.1'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version:'2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version:'2.7.0'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version:'2.2.6.RELEASE'
+    compile "com.fasterxml.jackson.core:jackson-databind:2.8.5"
+	compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5"
+    compile ('com.maxmind.geoip2:geoip2:2.8.0'){
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+    }
+
+
+    //testCompile "com.h2database:h2"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "com.mockrunner:mockrunner-jdbc:1.0.8"
+}

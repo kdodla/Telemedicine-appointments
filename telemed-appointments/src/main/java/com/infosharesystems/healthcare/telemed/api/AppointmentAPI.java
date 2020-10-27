@@ -30,7 +30,7 @@ public class AppointmentAPI extends BaseController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public AddAppointmentsResponse saveBookAppointment(@RequestBody BookAppointmentRequest request) {
 
-     	LOGGER.info("Rest API /bookAppointment/create POST invoked with data '{}'", request);
+		LOGGER.info("Rest API /bookAppointment/create POST invoked with data '{}'", request);
 		final long start = System.currentTimeMillis();
 		AddAppointmentsResponse response = new AddAppointmentsResponse();
 		try {
